@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import ImgLoading from "./imgLoading";
+import ImgLoading from "./ImgLoading";
 
 const ProductBox = ({ product, type, txtClass, clickFnc }) => {
     const [isHovered, setIsHovered] = useState(false);

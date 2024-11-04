@@ -1,6 +1,6 @@
 "use server";
 import Link from "next/link";
-import ImgLoading from "./imgLoading";
+import ImgLoading from "./ImgLoading";
 
 const BrandsContent = () => {
     const allBrands = [
