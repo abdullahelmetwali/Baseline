@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import SearchBox from "./SearchBox";
 const SideBar = ({ setSideBar }) => {
     const [shopMenu, setShopMenu] = useState(false);
     const [brandsMenu, setBrandsMenu] = useState(false);
@@ -98,18 +99,8 @@ const SideBar = ({ setSideBar }) => {
                     </li>
                 </ul>
             </div>
-            <div className="flex">
-                <input type="text" placeholder="Search" className="my-8 bg-transparent font-thin outline-none border-b-black border mx-3 placeholder:text-black text-xl w-3/4" />
-                <button>
-                    <Image
-                        src={'/icons/Search.svg'}
-                        width={27}
-                        height={27}
-                        alt="Search"
-                        title="Search"
-                        className="w-7 h-auto"
-                    />
-                </button>
+            <div className="my-8">
+                <SearchBox products={null} setSearch={null} close={closeMenu} />
             </div>
         </>
     )

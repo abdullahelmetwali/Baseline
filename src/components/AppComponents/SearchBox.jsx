@@ -6,7 +6,7 @@ import Link from "next/link";
 import AllBlogs from '@/data/blogs.json';
 import ProductSwiper from "../ProductPGComponents/ProductSwiper";
 
-const SearchBox = ({ products, setSearch }) => {
+const SearchBox = ({ products, setSearch, close }) => {
     const router = useRouter();
     const [searchValue, setSearchValue] = useState('');
     const links = ['New Arrivals', 'Air Jordan', 'Asics', 'Converse', 'Crocs', 'Nike Dunk', 'New Balance', 'Nike Dunks', 'Reebok', 'Vans'];
@@ -18,7 +18,9 @@ const SearchBox = ({ products, setSearch }) => {
     const searchedBlogs = AllBlogs.filter(blog => blog.title.toLowerCase().includes(searchValue.toLowerCase()));
     const searchedLinks = links.filter(link => link.toLowerCase().includes(searchValue.toLowerCase()));
     const closeSearchMenu = () => {
-        setSearch(false);
+        if (setSearch) {
+            setSearch(false);
+        }
     };
 
     return (
@@ -33,6 +35,9 @@ const SearchBox = ({ products, setSearch }) => {
                             setSearch(prev => !prev)
                         }
                         closeSearchMenu();
+                        if (close) {
+                            close();
+                        }
                     }}
                 >
                     <button type="submit">
