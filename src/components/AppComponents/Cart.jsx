@@ -32,7 +32,7 @@ const Cart = () => {
                         <p className="my-4 text-lg">
                             Your cart is currently empty.
                         </p>
-                        <Link href={`/`} className="relative text-xl hover:text-blue-600 underline underline-offset-8">
+                        <Link href={`/shop/all`} className="relative text-xl hover:text-blue-600 underline underline-offset-8" onClick={toggleCart}>
                             Continue shopping &#8594;
                         </Link>
                     </div>

@@ -23,9 +23,10 @@ const FAQs = () => {
                     <li
                         key={faqIndx}
                         className={`border-b border-b-black p-4 ${faqIndx % 2 === 0 ? 'border-r border-r-black tab:border-r-0' : ''} tab:px-2`}
+                        onClick={() => toggleAnswer(faqIndx)}
                     >
                         <div className="flex items-center justify-between">
-                            <h3 className="text-2xl tracking-tighter">{faq.question}</h3>
+                            <h3 className="text-2xl tracking-tighter tab:w-3/4">{faq.question}</h3>
                             <button
                                 className="m-0 p-0"
                                 onClick={() => toggleAnswer(faqIndx)}
@@ -36,12 +37,12 @@ const FAQs = () => {
                                     height={23}
                                     alt={openQuestions.includes(faqIndx) ? "Close" : "Open"}
                                     title={openQuestions.includes(faqIndx) ? "Close Answer" : "Open Answer"}
-                                    className="w-4 h-auto"
+                                    className="w-4 h-auto tab:w-5"
                                 />
                             </button>
                         </div>
                         <p
-                            className={`mt-1 text-base overflow-hidden transition-all duration-300 ease-in-out ${openQuestions.includes(faqIndx) ? 'max-h-[100px] opacity-100' : 'max-h-0 opacity-0'}`}
+                            className={`mt-1 text-base overflow-hidden transition-all duration-300 ease-in-out ${openQuestions.includes(faqIndx) ? 'max-h-[100px] opacity-100' : 'max-h-0 opacity-0'} tab:text-xl`}
                         >
                             {faq.answer}
                         </p>
