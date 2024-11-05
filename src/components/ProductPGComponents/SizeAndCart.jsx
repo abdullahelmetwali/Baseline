@@ -50,12 +50,7 @@ const SizeAndCart = ({ productDetails, searchParams }) => {
             const newCart = [newItem];
             localStorage.setItem('cart', JSON.stringify(newCart));
         }
-        setTimeout(() => {
-            new Promise(res => {
-                res;
-                toggleCart();
-            })
-        }, 500)
+        toggleCart();
     };
 
     return (
