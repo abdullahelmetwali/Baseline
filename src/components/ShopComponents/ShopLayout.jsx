@@ -26,8 +26,8 @@ const ShopLayout = ({ type }) => {
                         <h1 className="title p-4 pt-8 border border-b-black">{returnTitle(type)}</h1>
                         <div>
                             <ul className="flex gap-6 text-nowrap p-3 border border-b-black text-lg scroll-smooth justify-start snap-x overflow-x-auto hide-scrollbar">
-                                <li className={`${type === 'all' ? 'underline underline-offset-2' : ''}`}>
-                                    <Link href={`/shop/all`}>
+                                <li className={`${type === 'all' ? 'underline underline-offset-2' : ''}text-nowrap whitespace-nowrap`}>
+                                    <Link href={`/shop/all`} className="text-nowrap whitespace-nowrap">
                                         Shop All
                                     </Link>
                                 </li>
