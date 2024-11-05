@@ -97,7 +97,7 @@ export default function NavBar({ products }) {
                             </button>
                         </li>
                         <li className="text-nowrap">
-                            <button onClick={toggleCart} className="text-nowrap">
+                            <button onClick={toggleCart} className="text-nowrap whitespace-nowrap">
                                 Cart ({cartCount})
                             </button>
                         </li>

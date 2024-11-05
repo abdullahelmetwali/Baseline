@@ -34,8 +34,8 @@ const ShopLayout = ({ type }) => {
                                 {
                                     links.map((link, linkIndx) => (
                                         <li key={linkIndx}
-                                            className={`${type === link.toLowerCase()?.replace(' ', '-') ? 'underline underline-offset-2' : ''} text-nowrap`}>
-                                            <Link href={`/shop/${link.toLowerCase().replace(' ', '-')}`} className="text-nowrap">
+                                            className={`${type === link.toLowerCase()?.replace(' ', '-') ? 'underline underline-offset-2' : ''} text-nowrap whitespace-nowrap`}>
+                                            <Link href={`/shop/${link.toLowerCase().replace(' ', '-')}`} className="text-nowrap whitespace-nowrap">
                                                 {link}
                                             </Link>
                                         </li>
