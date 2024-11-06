@@ -68,7 +68,7 @@ const Home = () => {
         <PopularProducts />
       </section>
       <section className="border-y border-y-black overflow-hidden">
-        <ProductsScroller url={`https://baseline-preset-modern-2.myshopify.com/collections/air-jordan/products.json`} type={'air-jordan'} scrollClass={`scroll`} />
+        <ProductsScroller url={`https://baseline-preset-modern-2.myshopify.com/collections/air-jordan/products.json`} type={'air-jordan'} scrollClass={`scroll`} imgClass={null} />
       </section>
       <section className="border-y border-b-black overflow-hidden">
         <ProductsScroller url={`https://baseline-preset-modern-2.myshopify.com/collections/nike-dunks/products.json`} type={'nike-dunks'} imgClass={`w-16 h-auto`} scrollClass={`scroll-opp`} />

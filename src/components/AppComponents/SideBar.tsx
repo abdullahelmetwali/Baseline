@@ -2,18 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import SearchBox from "./SearchBox";
-const SideBar = ({ setSideBar }) => {
-    const [shopMenu, setShopMenu] = useState(false);
-    const [brandsMenu, setBrandsMenu] = useState(false);
-    const brandLinks = ['Air Jordan', 'Asics', 'Converse', 'Crocs', 'New Balance', 'Nike Dunks', 'Reebok', 'Vans']
-    const closeMenu = () => {
-        setSideBar(false);
-    };
+
+interface SideBarProps {
+    setSideBar: () => void | null
+}
+const SideBar: React.FC<SideBarProps> = ({ setSideBar }) => {
+    const [shopMenu, setShopMenu] = useState<boolean>(false);
+    const [brandsMenu, setBrandsMenu] = useState<boolean>(false);
+    const brandLinks: readonly string[] = ['Air Jordan', 'Asics', 'Converse', 'Crocs', 'New Balance', 'Nike Dunks', 'Reebok', 'Vans']
 
     return (
         <>
             <div className="flex justify-end px-3 py-5">
-                <button onClick={() => setSideBar(prev => !prev)}>
+                <button onClick={() => setSideBar()}>
                     <Image
                         src={'/icons/Close.svg'}
                         width={27}
@@ -42,17 +43,17 @@ const SideBar = ({ setSideBar }) => {
                         </div>
                         <ul className={`text-lg w-full overflow-hidden transition-all duration-150 ease-in-out ${shopMenu ? 'max-h-full opacity-100 py-3 pl-5' : 'max-h-0 opacity-0'}`}>
                             <li>
-                                <Link href={`/shop/all`} onClick={closeMenu}>
+                                <Link href={`/shop/all`} onClick={setSideBar}>
                                     Shop All
                                 </Link>
                             </li>
                             <li>
-                                <Link href={`/shop/new-arrivals`} onClick={closeMenu}>
+                                <Link href={`/shop/new-arrivals`} onClick={setSideBar}>
                                     New Arrivals
                                 </Link>
                             </li>
                             <li>
-                                <Link href={`/shop/on-sale`} onClick={closeMenu}>
+                                <Link href={`/shop/on-sale`} onClick={setSideBar}>
                                     On Sale
                                 </Link>
                             </li>
@@ -75,7 +76,7 @@ const SideBar = ({ setSideBar }) => {
                                     <ul className={`text-lg w-full overflow-hidden transition-all duration-150 ease-in-out ${brandsMenu ? 'max-h-full opacity-100 py-3 pl-5' : 'max-h-0 opacity-0'}`}>
                                         {
                                             brandLinks.map((br, brIndx) => (
-                                                <li key={brIndx} onClick={closeMenu}>
+                                                <li key={brIndx} onClick={setSideBar}>
                                                     <Link href={`/shop/${br.replace(' ', '-').toLowerCase()}`}>
                                                         {br}
                                                     </Link>
@@ -88,19 +89,19 @@ const SideBar = ({ setSideBar }) => {
                         </ul>
                     </li>
                     <li className="px-2 py-4">
-                        <Link href={`/blogs`} onClick={closeMenu}>
+                        <Link href={`/blogs`} onClick={setSideBar}>
                             Blog
                         </Link>
                     </li>
                     <li className="border border-y-black px-2 py-4">
-                        <Link href={`/about`} onClick={closeMenu}>
+                        <Link href={`/about`} onClick={setSideBar}>
                             About
                         </Link>
                     </li>
                 </ul>
             </div>
             <div className="my-8">
-                <SearchBox products={null} setSearch={null} close={closeMenu} />
+                <SearchBox products={null} setSearch={null} close={setSideBar} />
             </div>
         </>
     )

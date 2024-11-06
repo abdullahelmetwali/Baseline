@@ -1,8 +1,16 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import React, { useState } from "react";
 
-const ImgLoading = ({ src, width, height, alt, title }) => {
+interface ImgLoadingProps {
+    src: string | null,
+    width: number | null,
+    height: number | null,
+    alt: string | null,
+    title: string
+}
+
+const ImgLoading: React.FC<ImgLoadingProps> = ({ src, width, height, alt, title }) => {
     const [isLoading, setIsLoading] = useState(true);
     return (
         <>

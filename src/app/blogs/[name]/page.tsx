@@ -3,9 +3,27 @@ import NextAndPrev from '@/components/BlogComponents/NextAndPrev';
 import AllBlogs from '@/data/blogs.json';
 import Image from 'next/image';
 
+interface BlogData {
+    header: string,
+    blog: string,
+};
+
+interface Blog {
+    img: string,
+    id: number,
+    title: string,
+    url: string,
+    author: string,
+    date: string,
+    intro: string,
+    conc: string,
+    blogData: BlogData[]
+};
+
+
 const BlogPage = ({ params }) => {
     const { name } = params;
-    const seenBlog = AllBlogs.find(blog => blog.url === name);
+    const seenBlog: Blog = AllBlogs.find(blog => blog.url === name);
     return (
         <main className='min-h-screen'>
             <section className="relative min-w-full min-h-[80vh] tab:min-h-48">

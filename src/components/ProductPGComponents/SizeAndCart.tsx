@@ -3,6 +3,20 @@ import { CartState } from "@/hooks/CartContext";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useContext } from "react";
 
+interface LocalStorageProduct {
+    price: number,
+    quantity: number,
+    handle: string,
+    title: string,
+    type: string,
+    img: string,
+    selectedSize: string
+};
+
+interface Variant {
+    title: string
+};
+
 const SizeAndCart = ({ productDetails, searchParams }) => {
     const params = useParams();
     const { toggleCart } = useContext(CartState);
@@ -31,14 +45,14 @@ const SizeAndCart = ({ productDetails, searchParams }) => {
 
         if (cartStorage) {
             const cartArr = JSON.parse(cartStorage);
-            const sameItemIndex = cartArr.findIndex(item => item.selectedSize === newItem.selectedSize);
+            const sameItemIndex = cartArr.findIndex((item: LocalStorageProduct) => item.selectedSize === newItem.selectedSize);
             // If exists, update its quantity
             if (sameItemIndex !== -1) {
                 const newItemUpdate = {
                     ...cartArr[sameItemIndex],
                     quantity: cartArr[sameItemIndex].quantity + 1,
                 };
-                const newCart = cartArr.map((item, i) => (i === sameItemIndex ? newItemUpdate : item));
+                const newCart = cartArr.map((item: LocalStorageProduct, i: number) => (i === sameItemIndex ? newItemUpdate : item));
                 localStorage.setItem('cart', JSON.stringify(newCart));
             } else {
                 // If the item doesn't exist, add it to the cart
@@ -59,7 +73,7 @@ const SizeAndCart = ({ productDetails, searchParams }) => {
                 <h2 className="text-xl font-medium mb-4">Size:</h2>
                 <ul className="flex flex-wrap gap-2">
                     {
-                        productDetails?.variants?.map((variant, varIndx) => (
+                        productDetails?.variants?.map((variant: Variant, varIndx: number) => (
                             <li key={varIndx} className={`p-1 px-2 text-lg cursor-pointer ${size === variant?.title ? 'border-black border' : ''}`} onClick={() => setSize(variant.title)}>
                                 {variant?.title}
                             </li>

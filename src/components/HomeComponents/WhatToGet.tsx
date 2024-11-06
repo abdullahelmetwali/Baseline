@@ -1,7 +1,13 @@
 "use server";
+import React from "react";
 import ProductSwiper from "../ProductPGComponents/ProductSwiper";
 
-const WhatToGet = async ({ url, swiperLength }) => {
+interface WhatToGetProps {
+    url: string | null,
+    swiperLength: number | null
+}
+
+const WhatToGet: React.FC<WhatToGetProps> = async ({ url, swiperLength }) => {
     let newArrivalsProducts = [];
     let error = null;
     try {
@@ -14,6 +20,6 @@ const WhatToGet = async ({ url, swiperLength }) => {
     } catch (err) {
         error = err.message;
     };
-    return <ProductSwiper sameProducts={newArrivalsProducts} type={`new-arrivals`} whatPage={'home'} swiperLength={swiperLength} />
+    return <ProductSwiper sameProducts={newArrivalsProducts} type={`new-arrivals`} whatPage={'home'} swiperLength={swiperLength} txtClass={null} clickFnc={null} />
 }
 export default WhatToGet

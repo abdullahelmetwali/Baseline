@@ -23,13 +23,13 @@ const PopularProducts = async () => {
     }
 
 
-    const returnStyle = (title, id) => {
-        const cuttedTitle = title.split(' ').map((word) => word.slice(0, 1)).filter((letter, indx) => letter !== '(' && indx > 1).join('')
-        const cuttedId = id.toString().split('').filter((_, wordIndex) => wordIndex < 6).join('')
+    const returnStyle = (title: string, id: number | string) => {
+        const cuttedTitle = title.split(' ').map((word: string) => word.slice(0, 1)).filter((letter: string, indx: number) => letter !== '(' && indx > 1).join('')
+        const cuttedId = id.toString().split('').filter((_: null, wordIndex: number) => wordIndex < 6).join('')
         return `${cuttedTitle}-${cuttedId}`
     }
 
-    const returnLink = (title) => {
+    const returnLink = (title: string) => {
         if (title.includes('Jordan')) return `air-jordan`;
         else if (title.includes('Balance')) return `new-balance`;
         else if (title.includes('Nike')) return `nike-dunks`;
@@ -50,7 +50,7 @@ const PopularProducts = async () => {
             </div>
             <ul className="border-t border-t-black z-10">
                 {
-                    limitedProducts.map((product, proIndx) => (
+                    limitedProducts.map((product, proIndx: number) => (
                         <li key={proIndx} className={`text-lg tab:text-base w-full ${proIndx === limitedProducts.length - 1 ? 'border-none' : 'border-b border-b-black'}`}
                         >
                             <Link href={`/shop/${returnLink(product?.title)}/${product?.handle}`} className="grid grid-cols-9 px-3 py-1 mob:grid-cols-1">
@@ -66,4 +66,4 @@ const PopularProducts = async () => {
         </section>
     );
 };
-export default PopularProducts
+export default PopularProducts;

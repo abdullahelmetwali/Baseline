@@ -2,8 +2,13 @@
 import Link from "next/link";
 import ImgLoading from "./ImgLoading";
 
+interface Brand {
+    img: string,
+    title: string
+}
+
 const BrandsContent = () => {
-    const allBrands = [
+    const allBrands: Brand[] = [
         {
             img: "/imgs/jordan.webp",
             title: "Air Jordan",
@@ -58,7 +63,7 @@ const BrandsContent = () => {
             <h1 className="title p-4 pt-8 border border-b-black tracking-tighter">Collections</h1>
             <main className="grid grid-cols-3 tab:grid-cols-1 bg-black gap-[1px]">
                 {
-                    allBrands.map((brand, brandIndex) => (
+                    allBrands.map((brand: Brand, brandIndex: number) => (
                         <Link key={brandIndex} className={`flex relative justify-center items-center bg-[#ececec]`} href={`/shop/${brand.title.replace(' ', '-').toLowerCase()}`}>
                             <ImgLoading
                                 src={brand.img}

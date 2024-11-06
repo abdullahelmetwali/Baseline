@@ -4,6 +4,16 @@ import { CartState } from "@/hooks/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 
+interface Product {
+    price: number,
+    quantity: number,
+    handle: string,
+    title: string,
+    type: string,
+    img: string,
+    selectedSize: string
+};
+
 const Cart = () => {
     const { cartCount, cart, toggleCart, AddQuantity, RemoveQuantity, RemoveProduct, totalPrice } = useContext(CartState);
     return (
@@ -39,7 +49,7 @@ const Cart = () => {
                 ) : (
                     <>
                         <div>
-                            {cart.map((ele, eleIndex) => (
+                            {cart.map((ele: Product, eleIndex: number) => (
                                 <div key={eleIndex} className="border-b border-b-black py-3 px-3 grid grid-cols-4 gap-2">
                                     <div className="col-span-1">
                                         <Link href={`/shop/${ele.type}/${ele.handle}?selectedSize=${ele.selectedSize}`} className="text-xl tracking-tighter" onClick={toggleCart}>

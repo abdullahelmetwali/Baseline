@@ -7,6 +7,11 @@ import IsTabletOrLarger from "@/hooks/isTabletOrLarger";
 import 'swiper/css/pagination';
 import 'swiper/css';
 
+interface Img {
+    src: string,
+    id: string | number
+};
+
 const ImagesBox = ({ productDetails }) => {
     const swiperRef = useRef(null);
     const isTabletOrLarger = IsTabletOrLarger();
@@ -26,7 +31,7 @@ const ImagesBox = ({ productDetails }) => {
                                 loop={true}
                             >
                                 {
-                                    productDetails.images?.map((img, imgIndx) => (
+                                    productDetails.images?.map((img: Img, imgIndx: number) => (
                                         <SwiperSlide key={imgIndx}>
                                             <Image
                                                 src={img.src}
@@ -61,7 +66,7 @@ const ImagesBox = ({ productDetails }) => {
                     </> : <>
                         <section className="border-r border-black">
                             {
-                                productDetails.images?.map((img, imgIndex) => (
+                                productDetails?.images?.map((img: Img, imgIndex: number) => (
                                     <Image
                                         key={imgIndex}
                                         src={img.src}

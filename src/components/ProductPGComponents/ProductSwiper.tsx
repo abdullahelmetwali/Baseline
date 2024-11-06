@@ -8,16 +8,43 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import IsTabletOrLarger from '@/hooks/isTabletOrLarger';
 
-const ProductSwiper = ({ sameProducts, type, whatPage, swiperLength, txtClass, clickFnc }) => {
+interface Product {
+    id: number | string | null,
+    title: string,
+    variants: ItemInArr | null,
+    images: ItemInArr | null
+    handle: string,
+    price: string | number | null,
+    vendor: string | string[] | null,
+    body_html: string | null
+};
+
+interface ItemInArr {
+    src: string | null,
+    price: number | null
+};
+
+interface ProductSwiperProps {
+    sameProducts: Product[],
+    type: string | null,
+    whatPage: string | null,
+    swiperLength: number | null,
+    txtClass: string | null,
+    clickFnc: () => void | null
+}
+
+const ProductSwiper: React.FC<ProductSwiperProps> = ({ sameProducts, type, whatPage, swiperLength, txtClass, clickFnc }) => {
     const swiperRef = useRef(null);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState<number>(0);
     const isTablet = IsTabletOrLarger();
+
     const updateSlideChanging = () => {
         if (swiperRef.current) {
             setActiveIndex(swiperRef.current.swiper.realIndex);
         }
     };
-    const returnLink = (title) => {
+
+    const returnLink = (title: string) => {
         if (title.includes('Jordan')) return `air-jordan`;
         else if (title.includes('Balance')) return `new-balance`;
         else if (title.includes('Nike')) return `nike-dunks`;
@@ -41,7 +68,7 @@ const ProductSwiper = ({ sameProducts, type, whatPage, swiperLength, txtClass, c
                     1024: { slidesPerView: 4 },
                 }}
             >
-                {sameProducts.map((sameProduct, productIndex) => (
+                {sameProducts.map((sameProduct: Product, productIndex: number) => (
                     <SwiperSlide key={productIndex} className={`${productIndex === sameProducts.length - 1 ? 'border-none' : 'border-r border-r-black tab:border-none'}`}>
                         <ProductBox product={sameProduct} type={type === null ? returnLink(sameProduct?.title) : type} txtClass={txtClass} clickFnc={clickFnc} />
                     </SwiperSlide>
@@ -53,7 +80,7 @@ const ProductSwiper = ({ sameProducts, type, whatPage, swiperLength, txtClass, c
                     whatPage === 'home' ?
                         isTablet ?
                             <div>
-                                {sameProducts.map((_, index) => (
+                                {sameProducts.map((_: null, index: number) => (
                                     <button
                                         key={index}
                                         onClick={() => swiperRef.current?.swiper.slideTo(index)}
@@ -73,7 +100,7 @@ const ProductSwiper = ({ sameProducts, type, whatPage, swiperLength, txtClass, c
                             </div>
                         :
                         <div className='hidden tab:block'>
-                            {sameProducts.map((_, index) => (
+                            {sameProducts.map((_: null, index: number) => (
                                 <button
                                     key={index}
                                     onClick={() => swiperRef.current?.swiper.slideTo(index)}

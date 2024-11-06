@@ -6,22 +6,54 @@ import Link from "next/link";
 import AllBlogs from '@/data/blogs.json';
 import ProductSwiper from "../ProductPGComponents/ProductSwiper";
 
-const SearchBox = ({ products, setSearch, close }) => {
+interface Product {
+    id: number | string | null,
+    title: string,
+    variants: ItemInArr | null,
+    images: ItemInArr | null
+    handle: string,
+    price: string | number | null,
+    vendor: string | string[] | null,
+    body_html: string | null
+};
+
+interface ItemInArr {
+    src: string | null,
+    price: number | null
+};
+
+interface SearchProps {
+    products: Product[] | null,
+    setSearch: () => void | null,
+    close: () => void | null
+};
+
+interface ObjectWithTTL {
+    title: string
+};
+
+const SearchBox: React.FC<SearchProps> = ({ products, setSearch, close }) => {
     const router = useRouter();
-    const [searchValue, setSearchValue] = useState('');
-    const links = ['New Arrivals', 'Air Jordan', 'Asics', 'Converse', 'Crocs', 'Nike Dunk', 'New Balance', 'Nike Dunks', 'Reebok', 'Vans'];
-    const searchProducts = products?.filter(pro => pro.title.toLowerCase().includes(searchValue.toLowerCase()));
-    const suggestionsWords = searchProducts?.map(pro => {
-        return pro.title.split(' ').filter(word => word.toLowerCase().includes(searchValue.toLowerCase())).join(' ').toLowerCase();
+    const [searchValue, setSearchValue] = useState<string>('');
+    const links: readonly string[] = ['New Arrivals', 'Air Jordan', 'Asics', 'Converse', 'Crocs', 'Nike Dunk', 'New Balance', 'Nike Dunks', 'Reebok', 'Vans'];
+    const searchProducts = products?.filter((pro) => pro.title.toLowerCase().includes(searchValue.toLowerCase()));
+    const suggestionsWords = searchProducts?.map((pro) => {
+        return pro.title.split(' ').filter((word: string) => word.toLowerCase().includes(searchValue.toLowerCase())).join(' ').toLowerCase();
     });
     const uniqueSuggestions = [...new Set(suggestionsWords)];
-    const searchedBlogs = AllBlogs.filter(blog => blog.title.toLowerCase().includes(searchValue.toLowerCase()));
+    const searchedBlogs = AllBlogs.filter((blog: ObjectWithTTL) => blog.title.toLowerCase().includes(searchValue.toLowerCase()));
     const searchedLinks = links.filter(link => link.toLowerCase().includes(searchValue.toLowerCase()));
+
     const closeSearchMenu = () => {
-        if (setSearch) {
-            setSearch(false);
+        if (setSearch !== null) {
+            setSearch();
         }
     };
+    const toggleSearch = () => {
+        if (setSearch !== null) {
+            setSearch();
+        }
+    }
 
     return (
         <>
@@ -31,11 +63,9 @@ const SearchBox = ({ products, setSearch, close }) => {
                     onSubmit={(e) => {
                         e.preventDefault();
                         router.push(`/shop/all?search=${(searchValue.trim().toLowerCase())}`);
-                        if (setSearch) {
-                            setSearch(prev => !prev)
-                        }
+                        toggleSearch();
                         closeSearchMenu();
-                        if (close) {
+                        if (close !== null) {
                             close();
                         }
                     }}
@@ -58,9 +88,9 @@ const SearchBox = ({ products, setSearch, close }) => {
                         onChange={(e) => setSearchValue(e.target.value)}
                     />
                 </form>
-                {setSearch &&
+                {setSearch !== null &&
                     <button onClick={() => {
-                        setSearch(prev => !prev);
+                        closeSearchMenu();
                         setSearchValue('');
                     }}>
                         <Image
@@ -87,7 +117,7 @@ const SearchBox = ({ products, setSearch, close }) => {
                                     key={index}
                                     href={`/shop/all?search=${word.toLowerCase()}`}
                                     className="px-3 text-lg border-b border-b-black p-1"
-                                    onClick={() => setSearch(prev => !prev)}
+                                    onClick={() => setSearch()}
                                 >
                                     {parts.map((part, i) =>
                                         part.toLowerCase() === searchValue.toLowerCase() ? (

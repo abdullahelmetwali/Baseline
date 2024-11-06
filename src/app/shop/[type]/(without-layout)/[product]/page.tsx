@@ -3,15 +3,40 @@ import ImagesBox from "@/components/ProductPGComponents/ImagesBox";
 import ProductSwiper from "@/components/ProductPGComponents/ProductSwiper";
 import SizeAndCart from "@/components/ProductPGComponents/SizeAndCart";
 
+interface Product {
+    id: number | string | null,
+    title: string,
+    variants: ItemInArr | null,
+    images: ItemInArr | null
+    handle: string,
+    price: string | number | null,
+    vendor: string | string[] | null,
+    body_html: string | null
+};
+
+interface ItemInArr {
+    src: string | null,
+    price: number | null
+};
+
 const ProductDetails = async ({ params, searchParams }) => {
     const { type } = params;
     const { product } = params;
     const productURL = `https://baseline-preset-modern-2.myshopify.com/collections/${type}/products/${product}.json`;
     const sameTypeProductsURL = `https://baseline-preset-modern-2.myshopify.com/collections/${type}/products.json`;
 
-    let productDetails = {};
+    let productDetails: Product = {
+        id: "",
+        title: "",
+        variants: null,
+        images: null,
+        handle: "",
+        price: "",
+        vendor: "",
+        body_html: ""
+    };
     let error = null;
-    let sameProducts = [];
+    let sameProducts: Product[] = [];
     try {
         const productResponse = await fetch(productURL);
         const sameProductsResponse = await fetch(sameTypeProductsURL);
@@ -34,8 +59,8 @@ const ProductDetails = async ({ params, searchParams }) => {
         error = err.message;
     };
 
-    const returnModel = (title) => {
-        return title.split(' ').filter((_, wordIndex) => wordIndex < 3).join(' ')
+    const returnModel = (title: string) => {
+        return title.split(' ').filter((_, wordIndex: number) => wordIndex < 3).join(' ')
     };
 
     return (
@@ -50,7 +75,7 @@ const ProductDetails = async ({ params, searchParams }) => {
                         <p className="text-2xl font-medium p-4 ">
                             ${productDetails?.variants[0]?.price}
                         </p>
-                        <SizeAndCart productDetails={productDetails} type={type} searchParams={searchParams} />
+                        <SizeAndCart productDetails={productDetails} searchParams={searchParams} />
                         <div>
                             <div className="flex text-lg gap-4 border-y-black border">
                                 <h3 className="p-2 w-1/4 border-r-black border">Model</h3>
@@ -87,10 +112,10 @@ const ProductDetails = async ({ params, searchParams }) => {
             <main className="my-8">
                 <h2 className="text-4xl font-medium m-4">You may also like</h2>
                 <section>
-                    <ProductSwiper sameProducts={sameProducts} type={type} seeBtn={'product'} />
+                    <ProductSwiper sameProducts={sameProducts} type={type} whatPage={'product'} txtClass={null} clickFnc={null} swiperLength={null} />
                 </section>
             </main>
         </>
     )
 }
-export default ProductDetails
+export default ProductDetails;

@@ -4,16 +4,33 @@ import { useParams, useSearchParams } from "next/navigation";
 import ProductBox from "./ProductBox";
 import Image from "next/image";
 
+interface Product {
+    id: number | string | null,
+    title: string,
+    variants: ItemInArr | null,
+    images: ItemInArr | null
+    handle: string,
+    price: string | number | null,
+    vendor: string | string[] | null,
+    body_html: string | null
+};
+
+
+interface ItemInArr {
+    src: string | null,
+    price: number | null
+};
+
 const ShopContent = ({ products }) => {
     const { type } = useParams();
     const searchedParams = useSearchParams();
-    const search = searchedParams.get('search');
+    const search: string | null = searchedParams.get('search');
     const [allProducts, setAllProducts] = useState(products);
-    const [currentPG, setCurrentPG] = useState(1);
-    const [containerHeight, setContainerHeight] = useState(0);
-    const [sortMenu, setSortMenu] = useState(false);
+    const [currentPG, setCurrentPG] = useState<number>(1);
+    const [containerHeight, setContainerHeight] = useState<number>(0);
+    const [sortMenu, setSortMenu] = useState<boolean>(false);
     const productBoxHeight = useRef(null);
-    const productsPerPG = 9;
+    const productsPerPG: number = 9;
 
     useEffect(() => {
         setAllProducts(products);
@@ -115,10 +132,10 @@ const ShopContent = ({ products }) => {
                             :
                             <p className="text-xl px-2 pt-4">Sorry, there are no products in this collection.</p>
                         :
-                        displayedProducts?.map((product, proIndx) => (
+                        displayedProducts?.map((product: Product, proIndx: number) => (
                             <li key={proIndx} ref={productBoxHeight}
                                 className={`border transition-all duration-150 ease-in-out bg-[#ececec]${((proIndx + 1) % 3) === 1 || ((proIndx + 1) % 3) === 2 ? 'border-r border-r-black tab:border-none' : ''}`}>
-                                <ProductBox product={product} type={type} />
+                                <ProductBox product={product} type={type} txtClass={null} clickFnc={null} />
                             </li>
                         ))}
                 </ul>

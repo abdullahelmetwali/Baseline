@@ -4,13 +4,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-const FAQs = () => {
-    const [openQuestions, setOpenQuestions] = useState([]);
+interface FAQ {
+    question: string,
+    answer: string
+};
 
-    const toggleAnswer = (index) => {
+const FAQs = () => {
+    const [openQuestions, setOpenQuestions] = useState<any>([]);
+
+    const toggleAnswer = (index: number) => {
         setOpenQuestions((prevOpenQuestions) =>
             prevOpenQuestions.includes(index)
-                ? prevOpenQuestions.filter((i) => i !== index)
+                ? prevOpenQuestions.filter((i: number) => i !== index)
                 : [...prevOpenQuestions, index]
         );
     };
@@ -19,7 +24,7 @@ const FAQs = () => {
         <section>
             <h1 className="text-7xl p-4 pt-7 tab:text-4xl tracking-tighter">FAQs</h1>
             <ul className="grid grid-cols-2 tab:grid-cols-1 border-t border-t-black">
-                {AllFaqs.map((faq, faqIndx) => (
+                {AllFaqs.map((faq: FAQ, faqIndx: number) => (
                     <li
                         key={faqIndx}
                         className={`border-b border-b-black p-4 ${faqIndx % 2 === 0 ? 'border-r border-r-black tab:border-r-0' : ''} tab:px-2`}

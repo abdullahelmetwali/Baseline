@@ -3,14 +3,19 @@ import { useEffect, useState } from "react";
 import AllBlogs from '@/data/blogs.json';
 import { useRouter } from "next/navigation";
 
+interface Blog {
+    id: number,
+    url: string
+};
+
 const NextAndPrev = ({ seenBlog }) => {
     const router = useRouter();
     const [seeNew, setSeeNew] = useState(null);
     const [seeOld, setSeeOld] = useState(null);
 
-    const nowIndex = AllBlogs.findIndex((blog) => blog.id === seenBlog.id);
-    const nextBlog = AllBlogs[nowIndex - 1];
-    const oldBlog = AllBlogs[nowIndex + 1];
+    const nowIndex: number = AllBlogs.findIndex((blog) => blog.id === seenBlog.id);
+    const nextBlog: Blog = AllBlogs[nowIndex - 1];
+    const oldBlog: Blog = AllBlogs[nowIndex + 1];
 
     useEffect(() => {
         if (seenBlog.id === AllBlogs[AllBlogs.length - 1].id) {

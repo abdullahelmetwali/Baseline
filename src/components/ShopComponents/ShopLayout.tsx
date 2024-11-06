@@ -3,12 +3,17 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import SearchBox from "../AppComponents/SearchBox";
 
-const ShopLayout = ({ type }) => {
-    const searchParams = useSearchParams();
-    const search = searchParams.get('search');
-    const links = ['New Arrivals', 'Air Jordan', 'Asics', 'Converse', 'Crocs', 'Nike Dunk', 'New Balance', 'Nike Dunks', 'Reebok', 'Vans'];
+interface LayoutProps {
+    type: string
+}
 
-    const returnTitle = (title) => {
+
+const ShopLayout: React.FC<LayoutProps> = ({ type }) => {
+    const searchParams = useSearchParams();
+    const search = searchParams.get('search') as string | null
+    const links: string[] = ['New Arrivals', 'Air Jordan', 'Asics', 'Converse', 'Crocs', 'Nike Dunk', 'New Balance', 'Nike Dunks', 'Reebok', 'Vans'];
+
+    const returnTitle = (title: string) => {
         return title.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
     };
     return (
@@ -19,7 +24,7 @@ const ShopLayout = ({ type }) => {
                         <h1 className="title p-4 pt-8 border border-b-black tracking-tighter">
                             All results for “{search.toLowerCase()}”
                         </h1>
-                        <SearchBox products={null} setSearch={null} />
+                        <SearchBox products={null} setSearch={null} close={null} />
                     </>
                     :
                     <>
