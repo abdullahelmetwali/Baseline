@@ -1,4 +1,4 @@
-import "server-only"
+import "server-only";
 import ImagesBox from "@/components/ProductPGComponents/ImagesBox";
 import ProductSwiper from "@/components/ProductPGComponents/ProductSwiper";
 import SizeAndCart from "@/components/ProductPGComponents/SizeAndCart";
@@ -94,7 +94,7 @@ const ProductDetails = async ({ params, searchParams }) => {
                             <p dangerouslySetInnerHTML={{ __html: productDetails?.body_html }} className="text-xl font-medium" />
                         </div>
                         <div className="my-4 p-4">
-                            <p className="text-lg">This is a demo store. Contact developer at <a href="https://abdullahelmetwali.netlify.app/" className="underline underline-offset-2 hover:text-blue-500" target="_blank">Abdullah ElMetwali</a></p>
+                            <p className="text-lg">This is a demo store. Contact developer at <a href="https://abdullahelmetwali.vercel.app/" className="underline underline-offset-2 hover:text-blue-500" target="_blank">Abdullah ElMetwali</a></p>
                         </div>
                     </div>
                 </section>

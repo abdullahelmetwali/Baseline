@@ -102,7 +102,7 @@ export default function Footer() {
                 <div className="flex justify-between items-start mob:flex-col mob:gap-4">
                     <div>
                         <h3 className="text-base">© 2024, Baseline.</h3>
-                        <p className="te">Powered by <a href="https://abdullahelmetwali.netlify.app/" className="hover:text-blue-500 underline underline-offset-2" target="_blank">Abdullah ElMetwali</a></p>
+                        <p className="te">Powered by <a href="https://abdullahelmetwali.vercel.app/" className="hover:text-blue-500 underline underline-offset-2" target="_blank">Abdullah ElMetwali</a></p>
                     </div>
                     <div className="flex gap-2">
                         <Image src={`/icons/Visa.svg`} alt="Visa" title="Visa" width={30} height={30} className="w-5 h-auto" />
